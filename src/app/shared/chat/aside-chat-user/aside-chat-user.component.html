@@ -1,0 +1,27 @@
+<dt *ngIf="user.visible">
+  <ng-template
+    #myPopover
+    title="Popover title"
+  >
+    <div class="usr-card" style="min-width: 200px;">
+      <img [src]="user.picture" [alt]="user.username" />
+      <div class="usr-card-content">
+        <h3>{{ user.username }}</h3>
+        <p [innerHTML]="user.role"></p>
+      </div>
+    </div>
+  </ng-template>
+  <a
+    href="#"
+    class="usr"
+    (click)="openChatBox($event)"
+    [attr.data-chat-id]="state.chatId"
+    [attr.data-chat-status]="user.status"
+    [popover]="myPopover"
+
+    placement="right"
+    triggers="mouseenter:mouseleave"
+  >
+    <i></i>{{ user.username }}
+  </a>
+</dt>

@@ -1,0 +1,21 @@
+<div id="content">
+  <div class="row">
+    <sa-big-breadcrumbs [items]="['Image Cropping', 'CropperJS']" icon="map-marker" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></sa-big-breadcrumbs>
+    <sa-stats class="hidden-3xs"></sa-stats>
+  </div>
+
+  <div *ngIf="vm$ | async as vm" class="row">
+    <div class="col-xs-2">
+        <section class="ar-images">
+            <div *ngFor="let image of vm.images" (click)="onSelectImage(image)" [class.active]="image === vm.selectedImage">
+              <img [src]="image">
+            </div>
+          </section>
+     
+    </div>
+    
+    <section class="ar-crop-section col-xs-10">
+      <sa-cropper [state]="vm" (onCrop)="onCrop($event)" (onOptionsChange)="onOptionsChange($event)"></sa-cropper>
+    </section>
+  </div>
+</div>

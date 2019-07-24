@@ -1,0 +1,16 @@
+
+# node files
+/node_modules
+
+# libraries
+/e2e
+
+# json files
+*.json
+
+# assets
+/src/assets
+
+# environment
+/src/environments
+

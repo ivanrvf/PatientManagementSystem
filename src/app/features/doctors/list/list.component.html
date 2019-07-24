@@ -1,0 +1,512 @@
+
+    <!-- <sa-widgets-grid>
+         <div sa-widget [editbutton]="false" color="blueDark">
+             <header>
+                 <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                 <h2>Customer Table</h2>
+             </header>
+             <div>
+                 <div class="widget-body no-padding">
+                     <sa-datatable [options]="options" tableClass="table table-striped table-bordered table-hover">
+                         <thead>
+                             <tr>
+                                 <th [style.width]="'8%'" data-hide="mobile-p">Customer ID</th>
+                                 <th [style.width]="'8%'" data-hide="mobile-p">FirstName</th>
+                                 <th [style.width]="'8%'" data-hide="mobile-p">MiddleName</th>
+                                 <th [style.width]="'8%'" data-hide="mobile-p">LastName</th>
+                                 <th [style.width]="'8%'" data-hide="mobile-p">EmailAddress</th>
+                                 <th [style.width]="'8%'" data-hide="mobile-p">CustomerTypeDescription</th>
+                             </tr>
+                         </thead>
+                         <tfoot>
+                             <tr>
+                                 <th>Customer ID</th>
+                                 <th>FirstName</th>
+                                 <th>MiddleName</th>
+                                 <th>LastName</th>
+                                 <th>EmailAddress</th>
+                                 <th>CustomerTypeDescription</th>
+                             </tr>
+                         </tfoot>
+                     </sa-datatable>
+                 </div>
+             </div>
+         </div>
+     </sa-widgets-grid>
+        -->
+    <sa-widgets-grid >
+        <div bsModal #mdModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content" style="width:850px;padding:unset">
+                    <div class="modal-header">
+                        <button type="button" class="close" (click)="mdModal.hide()" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title">
+                            <img src="assets/img/logo.png" width="150" alt="SmartAdmin">
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- widget options:
+                        usage: <div sa-widget [editbutton]="false">
+
+                        [colorbutton]="false"
+                        [editbutton]="false"
+                        [togglebutton]="false"
+                        [deletebutton]="false"
+                        [fullscreenbutton]="false"
+                        [custombutton]="false"
+                        [collapsed]="true"
+                        [sortable]="false"
+
+                        -->
+                        <!-- widget div-->
+                        <div>
+                            <div class="widget-body fuelux">
+                                <fuel-ux-wizard (complete)="onWizardComplete(myForm)">
+                                    <div class="wizard">
+                                        <div class="steps-container">
+                                            <ul class="steps">
+                                                <li data-step="1" class="active">
+                                                    <span class="badge badge-info">1</span>Personal Info<span class="chevron"></span>
+                                                </li>
+                                                <li data-step="2">
+                                                    <span class="badge">2</span>Address Information<span class="chevron"></span>
+                                                </li>
+                                                <li data-step="3">
+                                                    <span class="badge">3</span>Contact Information<span class="chevron"></span>
+                                                </li>
+                                                <li data-step="4">
+                                                    <span class="badge">4</span>Complete<span class="chevron"></span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="actions">
+                                            <button type="button" class="btn btn-sm btn-primary btn-prev">
+                                                <i class="fa fa-arrow-left"></i>Prev
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-success btn-next" data-last="Finish">
+                                                Next<i class="fa fa-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="step-content">
+                                        <form [formGroup]="myForm" class="form-horizontal">
+                                            <div class="step-pane active" data-step="1">
+                                                <h3><strong>Personal Info </strong></h3>
+                                                <!-- wizard form starts here -->
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">First name</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control" type="hidden" formControlName="CustomerID">
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="text" formControlName="FirstName">
+                                                                <span class="input-group-addon"><!-- <i class="fa fa-warning"></i>--></span>
+                                                            </div>
+                                                            <!--<span class="help-block">Something may have gone wrong</span>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Middle name</label>
+                                                        <div class="col-md-10">
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="text" formControlName="MiddleName">
+                                                                <span class="input-group-addon"><!-- <i class="fa fa-warning"></i>--></span>
+                                                            </div>
+                                                            <!--<span class="help-block">Something may have gone wrong</span>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Last name</label>
+                                                        <div class="col-md-10">
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="text" formControlName="LastName">
+                                                                <span class="input-group-addon"><!-- <i class="fa fa-warning"></i>--></span>
+                                                            </div>
+                                                            <!--<span class="help-block">Something may have gone wrong</span>-->
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="col-md-2 control-label">Email Address</label>
+                                                        <div class="col-md-10">
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="text" formControlName="EmailAddress">
+                                                                <span class="input-group-addon"><!-- <i class="fa fa-warning"></i>--></span>
+                                                            </div>
+                                                            <!--<span class="help-block">Something may have gone wrong</span>-->
+                                                        </div>
+                                                    </div>
+                                                    <!--
+                            <div class="form-group has-error">
+                                <label class="col-md-2 control-label">Input error</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-remove-circle"></i></span>
+                                    </div>
+                                    <span class="help-block"><i class="fa fa-warning"></i> Please correct the error</span>
+                                </div>
+                            </div>
+                            <div class="form-group has-success">
+                                <label class="col-md-2 control-label">Input success</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                                        <input class="form-control" type="text">
+                                        <span class="input-group-addon"><i class="fa fa-check"></i></span>
+                                    </div>
+                                    <span class="help-block">Something may have gone wrong</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Input icon success</label>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-icon-left">
+                                                <i class="fa txt-color-green fa-check"></i>
+                                                <input class="form-control" placeholder="Left Icon" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                                                </fieldset>
+                                            </div>
+                                            <div class="step-pane" data-step="2">
+                                                <h3><strong>Address Information</strong></h3>
+                                                <fieldset>
+                                                    <!--
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Address Line 1</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="addressLine1">
+                                        <span class="input-group-addon"><!-- <i class="fa fa-warning"></i></span>
+                                    </div>
+                                    <!--<span class="help-block">Something may have gone wrong</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">Address Line 2</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="addressLine2">
+                                        <span class="input-group-addon"><!-- <i class="fa fa-warning"></i></span>
+                                    </div>
+                                    <!--<span class="help-block">Something may have gone wrong</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">City</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="city">
+                                        <span class="input-group-addon"><!-- <i class="fa fa-warning"></i></span>
+                                    </div>
+                                    <!--<span class="help-block">Something may have gone wrong</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">State</label>
+                                <div class="col-md-10">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" name="state">
+                                        <span class="input-group-addon"><!-- <i class="fa fa-warning"></i></span>
+                                    </div>
+                                    <!--<span class="help-block">Something may have gone wrong</span>
+                                </div>
+                            </div>-->
+                                                    <div formArrayName="addresses">
+                                                        <!--<h3>Aliases</h3> <button (click)="addAlias()">Add Alias</button>-->
+                                                       
+                                                        <div *ngFor="let address of this.myForm.get('addresses').controls;let i=index">
+                                                            <!-- The repeated alias template -->
+                                                            <div *ngIf="i%4 == 0" class="form-group">
+                                                                <label class="col-md-2 control-label">AddressLine1</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="text" [formControlName]="i">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="i%4 == 1" class="form-group">
+                                                                <label class="col-md-2 control-label">AddressLine2</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="text" [formControlName]="i">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="i%4 == 2" class="form-group">
+                                                                <label class="col-md-2 control-label">City</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="text" [formControlName]="i">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div *ngIf="i%4 == 3" class="form-group">
+                                                                <label class="col-md-2 control-label">State</label>
+                                                                <div class="col-md-10">
+                                                                    <div class="input-group">
+                                                                        <input class="form-control" type="text" [formControlName]="i">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <!--
+                        <alert type="warning" dismissible="true">
+                            <i class="fa-fw fa fa-warning"></i>
+                            <strong>Warning</strong> Your monthly traffic is reaching limit.
+                        </alert>
+                        <alert type="success" dismissible="true">
+                            <i class="fa-fw fa fa-check"></i>
+                            <strong>Success</strong> The page has been added.
+                        </alert>
+                        <alert type="info" dismissible="true">
+                            <i class="fa-fw fa fa-info"></i>
+                            <strong>Info!</strong> You have 198 unread messages.
+                        </alert>
+                        <alert type="danger" dismissible="true">
+                            <i class="fa-fw fa fa-times"></i>
+                            <strong>Error!</strong> The daily cronjob has failed.
+                        </alert>
+                            -->
+                                            </div>
+                                            <div class="step-pane" data-step="3">
+                                                <h3><strong>Contact Information </strong></h3>
+                                                <fieldset>
+                                                    <div formArrayName="contactList">
+                                                        <!--<h3>Aliases</h3> <button (click)="addAlias()">Add Alias</button>-->
+
+                                                        <div *ngFor="let contact of this.myForm.get('contactList').controls; let i=index">
+                                                            <!-- The repeated alias template -->
+                                                            <label>
+                                                                <input type="text" [formControlName]="i">
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <!--
+    <div class="form-group">
+        <label class="col-md-2 control-label">Phone Ext</label>
+        <div class="col-md-2">
+            <div class="input-group">
+                <input class="form-control" type="text" name="phoneExt">
+                <span class="input-group-addon"><!-- <i class="fa fa-warning"></i>
+                            </span>
+                    </div>
+                    <!--<span class="help-block">Something may have gone wrong</span>
+            </div>
+            <label class="col-md-2 control-label">Phone Number</label>
+            <div class="col-md-5">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="phoneNumber">
+                    <span class="input-group-addon"><!-- <i class="fa fa-warning"></i></span>
+                </div>
+                <!--<span class="help-block">Something may have gone wrong</span>
+            </div>
+    </div>
+    -->
+                                                </fieldset>
+                        </div>
+                                            <div class="step-pane" data-step="4">
+                                                <h3><strong>Step 4 </strong> - Finished!</h3>
+                                                <br>
+                                                <br>
+                                                <h1 class="text-center text-success">
+                                                    <i class="fa fa-check"></i> Congratulations!
+                                                    <br>
+                                                    <small>Click finish to end wizard</small>
+                                                </h1>
+                                                <br>
+                                                <br>
+                                                <br>
+                                                <br>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </fuel-ux-wizard>
+
+                                <!-- end widget -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end widget div -->
+    </sa-widgets-grid>
+    <sa-widgets-grid>
+        <div sa-widget [editbutton]="false" [fullscreenbutton]="false" color="blueDark">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h2>Customer List</h2>
+            </header>
+
+            <div>
+                <div class="widget-body">
+                    <div class="lightest-gray-bg">
+                        <div class="row" style="padding: 8px 12px">
+                            <div class="col-sm-12">
+                                <small class="pull-right">
+                                    <a (click)="table.rowDetail.expandAllRows()">Expand All</a> |
+                                    <a (click)="table.rowDetail.collapseAllRows()">Collapse All</a>
+                                </small>
+                            </div>
+                        </div>
+                        <ngx-datatable style="height: 50vh"
+                                       #myTable
+                                       class='tabale table-striped table-hover'
+                                       [columnMode]="'force'"
+                                       [headerHeight]="40"
+                                       [footerHeight]="45"
+                                       [rowHeight]="35"
+                                       [scrollbarV]="35"
+                                       [scrollbarH]="35"
+                                       [rows]="rows"
+                                       [cssClasses]="{
+            sortAscending: 'fa fa-sort-up',
+            sortDescending: 'fa fa-sort-down',
+            pagerLeftArrow: 'fa  fa-angle-left',
+            pagerRightArrow: 'fa fa-angle-right',
+            pagerPrevious: 'fa fa-angle-double-left',
+            pagerNext: 'fa fa-angle-double-right'
+          }"
+                                       (page)="onPage($event)">
+
+                            <!-- Row Detail Template -->
+                            <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
+                                <ng-template let-row="row" ngx-datatable-row-detail-template style="overflow:auto">
+
+                                    <accordion class="smart-accordion-default panel-group" [closeOthers]="true">
+                                        
+                                        <accordion-group [isOpen]="true" #group2>
+                                            <h5 class="panel-title" accordion-heading>
+                                                <a>
+                                                    <i class="fa txt-color-blue"
+                                                       [class.fa-plus]="!row.$$expanded"
+                                                       [class.fa-minus]="row.$$expanded"></i>
+                                                    &nbsp;<b>Address</b>
+                                                </a>
+                                            </h5>
+                                            <div class="no-padding">
+                                                <table class="table table-bordered table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Address Line 1</th>
+                                                            <th>Address Line 2</th>
+                                                            <th>City</th>
+                                                            <th>State</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let address of row.addresses">
+                                                            <td>{{address.AddressLine1}}</td>
+                                                            <td>{{address.AddressLine2}}</td>
+                                                            <td>{{address.City}}</td>
+                                                            <td>{{address.State}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </accordion-group>
+                                        <accordion-group #group3>
+                                            <h5 class="panel-title" accordion-heading>
+                                                <a>
+                                                    <i class="fa txt-color-blue"
+                                                       [class.fa-plus]="!row.$$expanded"
+                                                       [class.fa-minus]="row.$$expanded"></i>
+                                                    &nbsp;<b>Contact Information</b>
+                                                </a>
+                                            </h5>
+                                            <div class="no-padding">
+                                                <table class="table table-bordered table-condensed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Phone Extension</th>
+                                                            <th>Phone Number</th>
+                                                            <th>Phone Number Type</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let contact of row.contactList">
+                                                            <td>{{contact.PhoneExt}}</td>
+                                                            <td>{{contact.PhoneNumber}}</td>
+                                                            <td>{{contact.CustomerPhoneNumberType}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </accordion-group>
+                                    </accordion>
+
+                                </ng-template>
+                            </ngx-datatable-row-detail>
+                            <!-- Column Templates -->
+                            <ngx-datatable-column [width]="40"
+                                                  [resizeable]="true"
+                                                  [sortable]="false"
+                                                  [draggable]="false"
+                                                  [canAutoResize]="false">
+                                <ng-template class="xxxx" let-row="row" ngx-datatable-cell-template>
+                                    <a class="fa"
+                                       [class.fa-plus]="!row.$$expanded"
+                                       [class.fa-minus]="row.$$expanded"
+                                       title="Expand/Collapse Row"
+                                       (click)="toggleExpandRow(row)">
+                                    </a>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="customerID" [width]="100" [resizeable]="true"
+                                                  [sortable]="false"
+                                                  [draggable]="false"
+                                                  [canAutoResize]="false">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <strong><a (click)="show(row)">{{row.CustomerID}}</a></strong>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="firstName" [resizeable]="true"
+                                                  [sortable]="false"
+                                                  [draggable]="false"
+                                                  [canAutoResize]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <strong>{{row.FirstName}}</strong>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="lastName" [resizeable]="true"
+                                                  [sortable]="false"
+                                                  [draggable]="false"
+                                                  [canAutoResize]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <strong>{{row.LastName}}</strong>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="emailAddress" [resizeable]="true"
+                                                  [sortable]="false"
+                                                  [draggable]="false"
+                                                  [canAutoResize]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <strong>{{row.EmailAddress}}</strong>
+                                </ng-template>
+                            </ngx-datatable-column>
+                            <ngx-datatable-column name="CustomerTypeDescription" [resizeable]="true"
+                                                  [sortable]="false"
+                                                  [draggable]="false"
+                                                  [canAutoResize]="true">
+                                <ng-template let-row="row" ngx-datatable-cell-template>
+                                    <strong>{{row.CustomerTypeDescription}}</strong>
+                                </ng-template>
+                            </ngx-datatable-column>
+                        </ngx-datatable>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </sa-widgets-grid>
+
